@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dog-tinder
+spec:
+  template:
+    metadata:
+      name: dog-tinder
+      labels:
+        service: dog-tinder
+    spec:
+      containers:
+      - name: dog-tinder-container
+        image: dog-tinder:example
+        resources:
+          requests:
+            cpu: 200m
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      restartPolicy: Always
